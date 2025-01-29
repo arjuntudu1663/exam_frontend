@@ -304,7 +304,7 @@ const Student_Home = () => {
                         myExams.map((x)=>{
                             return <Card   style={{display:"flex",flexDirection:"row",justifyContent:"space-between",marginBottom:"15px",width:"100%",padding:"15px"}}>
                               <h3>{x.name}</h3>
-                              fm- {fm}
+                              fullMarks - {x.fullMarks}
                               <Button variant='outlined' style={{width:"30%"}} color='success'  onClick={e=>getQuestions(x._id,x.name,x.batchCode,x.duration,x.startTime)}>Open</Button>
                             </Card>
                         })

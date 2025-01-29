@@ -183,7 +183,7 @@ const Exam = ({org_id}) => {
                      status- <span style={{fontWeight:"bold"}}>{x.status}</span>
                      <p></p>
 
-                     fullMars - {x.fullMarks}
+                     fullMarks - {x.fullMarks}
 
                      <p></p>
 

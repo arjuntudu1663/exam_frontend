@@ -117,10 +117,11 @@ const Result = ({org_id}) => {
 
                 <div style={{display:"flex",width:"100%",alignItems:"center",justifyContent:"space-between",padding:"15px"}}>
                   
-                  <h4>{x.name}</h4><TextField onChange={e=>searchStudent(x.givers,e.target.value,x._id,x.roll_no)} label = " name / roll number"/>
-               
+                  <h4>{x.name} | <span style={{fontWeight:"bolder",opacity:"0.6"}}>{x.fullMarks} </span>  </h4><TextField onChange={e=>searchStudent(x.givers,e.target.value,x._id,x.roll_no)} label = " name / roll number"/>
+                 
                 </div>
-                  
+                <p></p>
+              
                   <p></p>
                 
                    {
