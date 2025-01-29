@@ -392,14 +392,14 @@ const Student_Home = () => {
 
                 
                  
-                 <Paper style={{display:"flex",width:"100%",justifyContent:"space-between",marginTop:"",alignItems:"center",padding:"30px"}}>
+                 <Paper style={{display:"flex",width:"100%",justifyContent:"space-between",marginTop:"",padding:"30px"}}>
                    <div>
                    
                     <h1>{cm}/{currExamAnswerKey.length}</h1>
 
                  Exam Name - <h4 style={{fontWeight:"bold"}}> {examDetails.name}</h4>
                      <p></p>
-                 Duration  - <h4 style={{fontWeight:"bold"}}> {examDetails.duration} hr </h4>
+                 Duration  - <h4 style={{fontWeight:"bold"}}> {examDetails.duration}</h4> 
                      <p></p>
                  Batch Code - <h4 style={{fontWeight:"bold"}}> {examDetails.batchCode}</h4> 
                 
