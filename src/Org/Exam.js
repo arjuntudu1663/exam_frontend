@@ -49,6 +49,7 @@ const Exam = ({org_id}) => {
     const createExam = async()=>{
         try{
             const response = await axios.post(`${LinkVercel}/exam_create`,{...details,organizer:org_id})
+            console.log(response,"<============ create exam response")
             if(response.statusText === 'OK'){
                 window.location.reload()
             }

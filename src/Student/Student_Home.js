@@ -224,7 +224,7 @@ const Student_Home = () => {
       const organizer_all = async() =>{
          
         try{
-          const response = await axios.get(`${Link}/organzer_all`)
+          const response = await axios.get(`${LinkVercel}/organzer_all`)
         
           setOrganizerAll(response.data)
         }catch(e){}
