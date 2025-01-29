@@ -3,7 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState , useRef } from 'react'
 import {  Card, Col, Row , Modal } from 'react-bootstrap'
 import { RxCross1 } from "react-icons/rx";
-import { Link } from '../Link';
+import { LinkVercel } from '../Link';
 
 const Result = ({org_id}) => {
     
@@ -86,7 +86,7 @@ const Result = ({org_id}) => {
         const all_exams = async() =>{ 
 
            try{
-            const response = await axios.post(`${Link}/exam_org`,{id:org_id})
+            const response = await axios.post(`${LinkVercel}/exam_org`,{id:org_id})
             console.log(response,"<==== org exams")
             setExams(response.data)
             

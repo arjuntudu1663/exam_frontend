@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios'
 import {useNavigate,useLocation} from 'react-router-dom'
 import { ButtonBase ,Button} from '@mui/material';
-import { Link } from './Link';
+import { LinkVercel } from './Link';
 
 function App() {
   
@@ -23,7 +23,7 @@ function App() {
   const register_org = async function(){
       console.log(registerDetails)
       try {
-        const response = await axios.post(`${Link}/organizer_register`,registerDetails)
+        const response = await axios.post(`${LinkVercel}/organizer_register`,registerDetails)
         if(response.data.value){
           setFlag("login")
         }
@@ -34,7 +34,7 @@ function App() {
   const login_org = async function(){
 
     try {
-      const response = await axios.post(`${Link}/organizer_login`,loginDetails)
+      const response = await axios.post(`${LinkVercel}/organizer_login`,loginDetails)
      
          if(response.data.value){
               

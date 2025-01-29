@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import { TextField , Button } from '@mui/material';
-import {Link} from '../Link';
+import {LinkVercel} from '../Link';
 
 const Student_Login = () => {
 
@@ -23,7 +23,7 @@ const Student_Login = () => {
     const register_org = async function(){
         console.log(registerDetails)
         try {
-          const response = await axios.post(`${Link}/student_register`,{...registerDetails,stream:"",code:"",batch:""})
+          const response = await axios.post(`${LinkVercel}/student_register`,{...registerDetails,stream:"",code:"",batch:""})
           if(response.data.value){
             setFlag("login")
           }
@@ -34,7 +34,7 @@ const Student_Login = () => {
     const login_org = async function(){
   
       try {
-        const response = await axios.post(`${Link}/student_login`,loginDetails)
+        const response = await axios.post(`${LinkVercel}/student_login`,loginDetails)
        
            if(response.data.value){
                 

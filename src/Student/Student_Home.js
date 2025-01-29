@@ -20,7 +20,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Timer from './Timer'
 import { FlagContext } from '../Starting'
-import { Link } from '../Link'
+import { LinkVercel } from '../Link'
 
 
 const Student_Home = () => {
@@ -80,7 +80,7 @@ const Student_Home = () => {
       setOnGoing([])
       
       try{
-         const response = await axios.get(`${Link}/exam_all`)
+         const response = await axios.get(`${LinkVercel}/exam_all`)
          
    
          response.data.map((x)=>{
@@ -104,7 +104,7 @@ const Student_Home = () => {
       console.log(location.state.value,"<========= second value")
       
       try{
-         const response = await axios.post(`${Link}/exam_my`,{batchCode:profile.stream+"/"+profile.batch,status:"on"})
+         const response = await axios.post(`${LinkVercel}/exam_my`,{batchCode:profile.stream+"/"+profile.batch,status:"on"})
          setMyExams(response.data)
          console.log(myExams,"<========= myExamssssssssssssssss")
    
@@ -130,7 +130,7 @@ const Student_Home = () => {
 
       try{
 
-        const response = await axios.post( `${Link}/allQuestions_exam`,{exam_id:exam_id})  
+        const response = await axios.post( `${LinkVercel}/allQuestions_exam`,{exam_id:exam_id})  
         
         setQuestions(response.data.response);
         setCurrExamAnswerKey(response.data.answers)
@@ -202,7 +202,7 @@ const Student_Home = () => {
 
       try{
          
-        const response = await axios.post(`${Link}/student_update`,{...additionalDetails,id:location.state.value._id})
+        const response = await axios.post(`${LinkVercel}/student_update`,{...additionalDetails,id:location.state.value._id})
         console.log(response,"<====")
         setProfile((prev)=>{
           return {...prev,batch:response.data.batch,stream:response.data.stream,roll_no:response.data.roll_no}
@@ -234,7 +234,7 @@ const Student_Home = () => {
       const profileSet = async() =>{
          
         try{
-          const response = await axios.post(`${Link}/student_find`,{id:location.state.value._id});
+          const response = await axios.post(`${LinkVercel}/student_find`,{id:location.state.value._id});
           
           setProfile(response.data.response)
            

@@ -4,7 +4,7 @@ import React, { useEffect, useState ,useContext} from 'react'
 import { useTimer , useTime ,useStopwatch } from 'react-timer-hook';
 import { FlagContext } from '../Starting';
 import { Modal,Card } from 'react-bootstrap';
-import { Link } from '../Link';
+import { LinkVercel } from '../Link';
 
 const Timer = ({timer,student_id,curr_marks,exam_id,startTime}) => {
     
@@ -42,7 +42,7 @@ const Timer = ({timer,student_id,curr_marks,exam_id,startTime}) => {
 
        try{
           
-        const response = await axios.post(`${Link}/result_add`,{exam_id:exam_id,student_id:student_id,currentMarks:cm})
+        const response = await axios.post(`${LinkVercel}/result_add`,{exam_id:exam_id,student_id:student_id,currentMarks:cm})
         console.log(response,"<========= result add response") 
         if(response.data.value == true){
            

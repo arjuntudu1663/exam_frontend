@@ -12,7 +12,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Link } from '../Link';
+import { LinkVercel } from '../Link';
 
 const Exam = ({org_id}) => {
   
@@ -48,7 +48,7 @@ const Exam = ({org_id}) => {
     
     const createExam = async()=>{
         try{
-            const response = await axios.post(`${Link}/exam_create`,{...details,organizer:org_id})
+            const response = await axios.post(`${LinkVercel}/exam_create`,{...details,organizer:org_id})
             if(response.statusText === 'OK'){
                 window.location.reload()
             }
@@ -59,7 +59,7 @@ const Exam = ({org_id}) => {
         console.log(details,"<=== exam on details")
         console.log(myRef.current)
         try{
-            const response = await axios.post(`${Link}/exam_on`,{exam_id:exam_id,org_id:org_id});
+            const response = await axios.post(`${LinkVercel}/exam_on`,{exam_id:exam_id,org_id:org_id});
             console.log(response , "<=== on response")
             if(response.statusText === 'OK'){
                 window.location.reload();
@@ -72,7 +72,7 @@ const Exam = ({org_id}) => {
     const examOff = async(exam_id)=>{
 
         try{
-            const response = await axios.post(`${Link}/exam_off`,{exam_id:exam_id,org_id:org_id});
+            const response = await axios.post(`${LinkVercel}/exam_off`,{exam_id:exam_id,org_id:org_id});
             console.log(response , "<=== off response")
             if(response.statusText === 'OK'){
                 window.location.reload();
@@ -90,7 +90,7 @@ const Exam = ({org_id}) => {
         
 
         try{
-            const response = await axios.post(`${Link}/add_question`,question)
+            const response = await axios.post(`${LinkVercel}/add_question`,question)
             console.log(response,"<=== add question response")
             
             if(response.statusText === 'OK'){
@@ -106,7 +106,7 @@ const Exam = ({org_id}) => {
     const allQuestions_exam = async(exam_id) =>{
     
          try{
-            const response = await axios.post(`${Link}/allQuestions_exam`,{exam_id:exam_id})
+            const response = await axios.post(`${LinkVercel}/allQuestions_exam`,{exam_id:exam_id})
             
             setCurrQuestions(response.data.response)
             console.log(response.data,"<== curr questions")
@@ -122,7 +122,7 @@ const Exam = ({org_id}) => {
              
              try{
 
-                const response = await axios.get(`${Link}/exam_all`);
+                const response = await axios.get(`${LinkVercel}/exam_all`);
                 console.log(response.data)
                 response.data.map((x)=>{
                     if(x.organizer === org_id){
