@@ -71,7 +71,7 @@ const Student_Login = () => {
         <p></p>
         <Button variant='outlined'  onClick={e=>setFlag("register")}>Don't Have A Account?</Button>
         <p></p>
-        <Button variant='outlined' href='/' color='error'>Go Back</Button>
+        <Button variant='outlined' href='/' color='error'>Organizer</Button>
         </Card.Footer>
          </Card>
          break;
@@ -98,6 +98,7 @@ const Student_Login = () => {
       <p></p>
       <Button variant='outlined' onClick={e=>setFlag("login")}>Already Have A Account?</Button>
       <p></p>
+      <Button variant='outlined' href='/' color='error'>Organizer</Button>
       
        
       </Card.Footer>
