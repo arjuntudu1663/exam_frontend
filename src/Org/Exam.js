@@ -50,9 +50,8 @@ const Exam = ({org_id}) => {
         try{
             const response = await axios.post(`${LinkVercel}/exam_create`,{...details,organizer:org_id})
             console.log(response,"<============ create exam response")
-            if(response.statusText === 'OK'){
-                window.location.reload()
-            }
+            window.location.reload()
+            
         }catch(e){}
     }
 
@@ -182,6 +181,9 @@ const Exam = ({org_id}) => {
                      duration - <span style={{fontWeight:"bold"}}>{x.duration}</span> hr
                      <p></p>
                      status- <span style={{fontWeight:"bold"}}>{x.status}</span>
+                     <p></p>
+
+                     fullMars - {x.fullMarks}
 
                      <p></p>
 

@@ -12,6 +12,7 @@ const Starting = () => {
   const [questionFlag,setQuestionFlag] = useState(false);
   const [examDisplayFlag,setExamDisplayFlag] = useState(true)
   const [currMakrs,setCurrMarks] = useState(0)
+  const [fullMarks,setFullMarks] = useState(0)
 
 
  

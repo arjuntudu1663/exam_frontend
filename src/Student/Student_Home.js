@@ -23,6 +23,7 @@ import { FlagContext } from '../Starting'
 import { LinkVercel } from '../Link'
 
 
+
 const Student_Home = () => {
 
     const navigate = useNavigate()
@@ -53,6 +54,7 @@ const Student_Home = () => {
     })
 
     const [examId,setExamId] = useState("")
+    const [fm,sfm] = useState(0)
     
      const [nowTime,setNowTime] = useState(0);
      const [startTime,setStartTime] = useState("")
@@ -131,9 +133,12 @@ const Student_Home = () => {
       try{
 
         const response = await axios.post( `${LinkVercel}/allQuestions_exam`,{exam_id:exam_id})  
-        
+        console.log(response.data.response.length,"<=== fm")
+
+
         setQuestions(response.data.response);
         setCurrExamAnswerKey(response.data.answers)
+        
        
         
   
@@ -299,7 +304,7 @@ const Student_Home = () => {
                         myExams.map((x)=>{
                             return <Card   style={{display:"flex",flexDirection:"row",justifyContent:"space-between",marginBottom:"15px",width:"100%",padding:"15px"}}>
                               <h3>{x.name}</h3>
-                              
+                              fm- {fm}
                               <Button variant='outlined' style={{width:"30%"}} color='success'  onClick={e=>getQuestions(x._id,x.name,x.batchCode,x.duration,x.startTime)}>Open</Button>
                             </Card>
                         })
@@ -350,7 +355,7 @@ const Student_Home = () => {
                         onGoing.map((x)=>{
                             return <Paper elevation={3}  style={{marginBottom:"15px",width:"50%",padding:"15px"}}>
                               <h3>{x.name}</h3>
-                              
+                            
                               <Button variant='contained' color='success'  onClick={e=>getQuestions(x._id,x.name,x.batchCode,x.duration,x.startTime)}>Open</Button>
                             </Paper>
                         })
