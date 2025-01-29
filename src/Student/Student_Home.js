@@ -166,7 +166,7 @@ const Student_Home = () => {
             }else{
               if(x.marks>0){
                  x.marks = x.marks-1
-                 if(currMarks>0){
+                 if(cm>0){
                   scm((prev)=>{
                     return prev-1
                   })
