@@ -104,7 +104,7 @@ const Student_Home = () => {
       console.log(location.state.value,"<========= second value")
       
       try{
-         const response = await axios.post(`${Link}/exam_my`,{batchCode:location.state.value.stream+"/"+location.state.value.batch,status:"on"})
+         const response = await axios.post(`${Link}/exam_my`,{batchCode:profile.stream+"/"+profile.batch,status:"on"})
          setMyExams(response.data)
          console.log(myExams,"<========= myExamssssssssssssssss")
    
@@ -208,7 +208,7 @@ const Student_Home = () => {
           return {...prev,batch:response.data.batch,stream:response.data.stream,roll_no:response.data.roll_no}
         })
         if(response.statusText === "OK"){
-          window.location.reload()
+          window.location.reload();
         }
           
         
@@ -242,6 +242,7 @@ const Student_Home = () => {
              return {...prev,id:response.data.response._id}
           })
           
+          console.log(profile,"<====== profile 1st")
       
         }catch(e){
 
@@ -261,7 +262,7 @@ const Student_Home = () => {
        organizer_all();
        profileSet();
        timeCalculate();
-       my_exams();
+     
        
       console.log(location.state.value)
       
@@ -292,42 +293,20 @@ const Student_Home = () => {
                   {profile.stream}/{profile.batch}/{profile.roll_no}
                   <p></p>
                 
-
+                 <Button variant='contained' color='success' onClick={my_exams}>Exams</Button>
+                 <p></p>
                   {
                         myExams.map((x)=>{
-                            return <Card   style={{marginBottom:"15px",width:"100%",padding:"15px"}}>
+                            return <Card   style={{display:"flex",flexDirection:"row",justifyContent:"space-between",marginBottom:"15px",width:"100%",padding:"15px"}}>
                               <h3>{x.name}</h3>
                               
-                              <Button variant='contained' style={{width:"30%"}} color='success'  onClick={e=>getQuestions(x._id,x.name,x.batchCode,x.duration,x.startTime)}>Open</Button>
+                              <Button variant='outlined' style={{width:"30%"}} color='success'  onClick={e=>getQuestions(x._id,x.name,x.batchCode,x.duration,x.startTime)}>Open</Button>
                             </Card>
                         })
                     }        
                    </Paper>
                    <p></p>
-                  <Accordion style={{width:"50%"}}>
-   
-                               <AccordionSummary
-                               expandIcon={<ArrowDropDownIcon />}
-                               >
-                              Organizers
-                               </AccordionSummary>
-                               <AccordionDetails>
-                               <List>
-                               {
-                                 organizerAll.map((x)=>{
-                                     return  <Paper style={{marginBottom:"15px"}} elevation={3}>
-                                       <ListItem>
-                                        <ListItemButton onClick = {e=>all_exams(x._id)} style={{fontWeight:"bold"}}>
-                                       
-                                        {x.username}
-                                        </ListItemButton>
-                                     </ListItem>   
-                                     </Paper>
-                                 })
-                               }
-                                </List> 
-                               </AccordionDetails>
-                    </Accordion>
+                  
                    
                       
                     <p></p>
@@ -397,11 +376,11 @@ const Student_Home = () => {
                    
                     <h1>{cm}/{currExamAnswerKey.length}</h1>
 
-                       <h4 style={{fontWeight:"bold"}}> {examDetails.name}</h4>
+                      Name - <h4 style={{fontWeight:"bold"}}> {examDetails.name}</h4>
                      <p></p>
-                     <h4 style={{fontWeight:"bold"}}> {examDetails.duration}</h4> 
+                      Duration -   <h4 style={{fontWeight:"bold"}}> {examDetails.duration}</h4> 
                      <p></p>
-                     <h4 style={{fontWeight:"bold"}}> {examDetails.batchCode}</h4> 
+                      BatchCode - <h4 style={{fontWeight:"bold"}}> {examDetails.batchCode}</h4> 
                 
                    </div>
 
