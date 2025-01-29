@@ -20,6 +20,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Timer from './Timer'
 import { FlagContext } from '../Starting'
+import { Link } from '../Link'
 
 
 const Student_Home = () => {
@@ -79,7 +80,7 @@ const Student_Home = () => {
       setOnGoing([])
       
       try{
-         const response = await axios.get("http://localhost:5000/exam_all")
+         const response = await axios.get(`${Link}/exam_all`)
          
    
          response.data.map((x)=>{
@@ -103,7 +104,7 @@ const Student_Home = () => {
       console.log(location.state.value,"<========= second value")
       
       try{
-         const response = await axios.post("http://localhost:5000/exam_my",{batchCode:location.state.value.stream+"/"+location.state.value.batch,status:"on"})
+         const response = await axios.post(`${Link}/exam_my`,{batchCode:location.state.value.stream+"/"+location.state.value.batch,status:"on"})
          setMyExams(response.data)
          console.log(myExams,"<========= myExamssssssssssssssss")
    
@@ -129,7 +130,7 @@ const Student_Home = () => {
 
       try{
 
-        const response = await axios.post("http://localhost:5000/allQuestions_exam",{exam_id:exam_id})  
+        const response = await axios.post( `${Link}/allQuestions_exam`,{exam_id:exam_id})  
         
         setQuestions(response.data.response);
         setCurrExamAnswerKey(response.data.answers)
@@ -201,7 +202,7 @@ const Student_Home = () => {
 
       try{
          
-        const response = await axios.post("http://localhost:5000/student_update",{...additionalDetails,id:location.state.value._id})
+        const response = await axios.post(`${Link}/student_update`,{...additionalDetails,id:location.state.value._id})
       
         setProfile((prev)=>{
           return {...prev,batch:response.data.batch,stream:response.data.stream,roll_no:response.data.roll_no}
@@ -223,7 +224,7 @@ const Student_Home = () => {
       const organizer_all = async() =>{
          
         try{
-          const response = await axios.get("http://localhost:5000/organizer_all")
+          const response = await axios.get(`${Link}/organzer_all`)
         
           setOrganizerAll(response.data)
         }catch(e){}
@@ -233,7 +234,7 @@ const Student_Home = () => {
       const profileSet = async() =>{
          
         try{
-          const response = await axios.post("http://localhost:5000/student_find",{id:location.state.value._id});
+          const response = await axios.post(`${Link}/student_find`,{id:location.state.value._id});
           
           setProfile(response.data.response)
            
@@ -274,17 +275,15 @@ const Student_Home = () => {
 
     <div style={{width:"100%",display:"grid",placeItems:"center"}}>
           
-          <div style={{width:"80%",marginTop:"100px",padding:"35px"}}> 
+          <div style={{width:"80%",marginTop:"50px",padding:"35px"}}> 
 
             
-            {qf? <></>  :<> <Chip style={{width:"100px",marginTop:"15px"}} color='error' label="Go Back" onClick={e=>navigate("/")}/></>}
+          {qf? <></>  :<> <Button variant='contained' color='error' style={{marginLeft:"15px"}} href="/Student_Login">Log Out</Button></>}
                 <Row>
                   <Col lg = {6} sm = {12 } style={{padding:"30px"}}>
                   {
-                  ef? <div >
+                  ef? <div  >
               
-             
-                  <p></p>
                    <Paper style={{width:"80%",padding:"15px"}} elevation={4}>
                     <h2>{profile.username}</h2>
                  
@@ -389,22 +388,26 @@ const Student_Home = () => {
                 }
                   
                   </Col>
-                  <Col lg = {qf?12:6} sm = {12}>
+                  <Col lg = {qf?12:6} sm = {12} style={{padding:"25px"}}>
 
                 
                  
-                 <Paper style={{display:"flex",width:"100%",justifyContent:"space-between",marginTop:"45px",padding:"30px"}}>
-                   <div><h1>{cm}/{currExamAnswerKey.length}</h1>
-                     {examDetails.name}
-                     <p></p>
-                     {examDetails.duration}
-                     <p></p>
-                     {examDetails.batchCode}
+                 <Paper style={{display:"flex",width:"100%",justifyContent:"space-between",marginTop:"",alignItems:"center",padding:"30px"}}>
+                   <div>
                    
+                    <h1>{cm}/{currExamAnswerKey.length}</h1>
+
+                 Exam Name - <h4 style={{fontWeight:"bold"}}> {examDetails.name}</h4>
+                     <p></p>
+                 Duration  - <h4 style={{fontWeight:"bold"}}> {examDetails.duration} hr </h4>
+                     <p></p>
+                 Batch Code - <h4 style={{fontWeight:"bold"}}> {examDetails.batchCode}</h4> 
+                
                    </div>
+
                    <Timer  timer={timer} student_id = {profile.id} curr_marks = {currMarks} exam_id = {examId}  startTime={startTime} />
                  </Paper>
-                 <div style={{marginLeft:"",height:"500px",width:"80%",overflow:"scroll"}}>
+                 <div style={{marginLeft:"10%",marginTop:"30px",height:"500px",width:"80%",overflow:"scroll"}}>
                  
                  
                
@@ -418,7 +421,7 @@ const Student_Home = () => {
                        <Card.Body style={{display:"flex",gap:"15px"}}>
                        
                        <FormControl>
-                       <FormLabel id="demo-radio-buttons-group-label">{x.title} <h1>original answer - {x.answer}</h1> </FormLabel>
+                       <FormLabel id="demo-radio-buttons-group-label">{x.title} </FormLabel>
                        <p></p>
                        <RadioGroup
                          aria-labelledby="demo-radio-buttons-group-label"

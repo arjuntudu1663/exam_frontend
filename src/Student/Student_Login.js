@@ -1,8 +1,9 @@
 import React ,{useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import { Card,Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import axios from 'axios';
-import { TextField } from '@mui/material';
+import { TextField , Button } from '@mui/material';
+import {Link} from '../Link';
 
 const Student_Login = () => {
 
@@ -22,7 +23,7 @@ const Student_Login = () => {
     const register_org = async function(){
         console.log(registerDetails)
         try {
-          const response = await axios.post("http://localhost:5000/student_register",{...registerDetails,stream:"",code:"",batch:""})
+          const response = await axios.post(`${Link}/student_register`,{...registerDetails,stream:"",code:"",batch:""})
           if(response.data.value){
             setFlag("login")
           }
@@ -33,7 +34,7 @@ const Student_Login = () => {
     const login_org = async function(){
   
       try {
-        const response = await axios.post("http://localhost:5000/student_login",loginDetails)
+        const response = await axios.post(`${Link}/student_login`,loginDetails)
        
            if(response.data.value){
                 
@@ -66,9 +67,11 @@ const Student_Login = () => {
         })} id="filled-basic" label="password" variant="filled" style={{width:"50%"}} />
         <p></p>
         <Card.Footer>
-        <Button onClick={login_org} variant='success'>Login</Button>
+        <Button onClick={login_org} variant='contained' color='success'>Login</Button>
         <p></p>
-        <Button variant='link' onClick={e=>setFlag("register")}>Don't Have A Account?</Button>
+        <Button variant='outlined'  onClick={e=>setFlag("register")}>Don't Have A Account?</Button>
+        <p></p>
+        <Button variant='outlined' href='/' color='error'>Go Back</Button>
         </Card.Footer>
          </Card>
          break;
@@ -91,9 +94,12 @@ const Student_Login = () => {
         })} id="filled-basic" label="re_password" variant="filled" style={{width:"50%"}} />
       <p></p>
       <Card.Footer>
-      <Button onClick={register_org} variant='success'>Register</Button>
+      <Button onClick={register_org} variant='contained' color='success'>Register</Button>
       <p></p>
-      <Button variant='link' onClick={e=>setFlag("login")}>Already Have A Account?</Button>
+      <Button variant='outlined' onClick={e=>setFlag("login")}>Already Have A Account?</Button>
+      <p></p>
+      
+       
       </Card.Footer>
   
        </Card>
@@ -109,8 +115,12 @@ const Student_Login = () => {
     <div style={{width:"100%",display:"grid",placeItems:"center"}}>
            
            <div style={{width:"40%",marginTop:"200px"}}>
+             <h1>Student</h1>
+          
+             <hr></hr>
                {element}
            </div>
+        
 
     </div>
 

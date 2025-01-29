@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios'
 import {useNavigate,useLocation} from 'react-router-dom'
 import { ButtonBase ,Button} from '@mui/material';
+import { Link } from './Link';
 
 function App() {
   
@@ -22,7 +23,7 @@ function App() {
   const register_org = async function(){
       console.log(registerDetails)
       try {
-        const response = await axios.post("http://localhost:5000/organizer_register",registerDetails)
+        const response = await axios.post(`${Link}/organizer_register`,registerDetails)
         if(response.data.value){
           setFlag("login")
         }
@@ -33,7 +34,7 @@ function App() {
   const login_org = async function(){
 
     try {
-      const response = await axios.post("http://localhost:5000/organizer_login",loginDetails)
+      const response = await axios.post(`${Link}/organizer_login`,loginDetails)
      
          if(response.data.value){
               
@@ -90,9 +91,9 @@ function App() {
       })} id="filled-basic" label="username" variant="filled" style={{width:"50%"}} />
     <p></p>
     <Card.Footer>
-    <Button onClick={register_org} variant='success'>Register</Button>
+    <Button onClick={register_org} variant='contained' color='success'>Register</Button>
     <p></p>
-    <Button variant='link' onClick={e=>setFlag("login")}>Already Have A Account?</Button>
+    <Button variant='outlined' onClick={e=>setFlag("login")}>Already Have A Account?</Button>
     </Card.Footer>
 
      </Card>
@@ -105,11 +106,14 @@ function App() {
     <div style = {{width:"100%",display:"grid",placeItems:"center"}}>
    
        <div  style = {{width:"50%",marginTop:"10%"}} >
+           <h1>Organizer</h1>
+           <hr></hr>
            {element}
            <hr></hr>
            <Button variant='contained' onClick={(e)=>{
              navigate("/Student_Login")
            }}>Student</Button>
+           
        </div>
        
    

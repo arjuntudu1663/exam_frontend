@@ -3,7 +3,8 @@ import axios from 'axios';
 import React, { useEffect, useState ,useContext} from 'react'
 import { useTimer , useTime ,useStopwatch } from 'react-timer-hook';
 import { FlagContext } from '../Starting';
-import { Modal } from 'react-bootstrap';
+import { Modal,Card } from 'react-bootstrap';
+import { Link } from '../Link';
 
 const Timer = ({timer,student_id,curr_marks,exam_id,startTime}) => {
     
@@ -41,7 +42,7 @@ const Timer = ({timer,student_id,curr_marks,exam_id,startTime}) => {
 
        try{
           
-        const response = await axios.post("http://localhost:5000/result_add",{exam_id:exam_id,student_id:student_id,currentMarks:cm})
+        const response = await axios.post(`${Link}/result_add`,{exam_id:exam_id,student_id:student_id,currentMarks:cm})
         console.log(response,"<========= result add response") 
         if(response.data.value == true){
            
@@ -88,7 +89,7 @@ const Timer = ({timer,student_id,curr_marks,exam_id,startTime}) => {
   return (
     <div style={{width:"40%"}}>
      
-        <Paper style={{padding:"35px"}} elevation={5}>
+        <Card style={{padding:"35px"}}>
           {qf?<h4>{timer*60*60-totalSeconds} seconds left</h4>:<></>}
      
         
@@ -97,12 +98,12 @@ const Timer = ({timer,student_id,curr_marks,exam_id,startTime}) => {
            
            
            {ef? <Button variant='outlined' color='success' onClick={examStart}>start</Button>:<></>}
-          {qf?<Button style={{marginLeft:"50px"}} variant='contained' color='error' onClick={examEnd}>Submit</Button>:<></>}
+          {qf?<Button style={{marginLeft:""}} variant='contained' color='error' onClick={examEnd}>Submit</Button>:<></>}
           </div>
           
           
   
-        </Paper>
+        </Card>
 
         <Modal style={{marginTop:"10%"}} show={modalFlag}>
            <Modal.Body >

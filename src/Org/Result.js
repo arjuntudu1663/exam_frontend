@@ -1,8 +1,9 @@
-import { Paper, TextField } from '@mui/material'
+import { Paper, TextField ,Button} from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState , useRef } from 'react'
-import { Button, Card, Col, Row , Modal } from 'react-bootstrap'
+import {  Card, Col, Row , Modal } from 'react-bootstrap'
 import { RxCross1 } from "react-icons/rx";
+import { Link } from '../Link';
 
 const Result = ({org_id}) => {
     
@@ -85,7 +86,7 @@ const Result = ({org_id}) => {
         const all_exams = async() =>{ 
 
            try{
-            const response = await axios.post("http://localhost:5000/exam_org",{id:org_id})
+            const response = await axios.post(`${Link}/exam_org`,{id:org_id})
             console.log(response,"<==== org exams")
             setExams(response.data)
             
@@ -100,9 +101,8 @@ const Result = ({org_id}) => {
   return (
     <div> 
     <div style={{display:"flex",gap:"20px",marginLeft:"",padding:""}}>
-    <TextField onChange={e=>setSearchExamVal(e.target.value)} style={{height:"10px"}} label = "search"/>
-   
-    <Button onClick={searchExam} variant='success'>Search</Button>
+    <input onChange={e=>setSearchExamVal(e.target.value)} style={{height:"",opacity:"0.6",padding:"5px"}} placeholder='search'  label = "search"/>
+    <Button onClick={searchExam} variant='contained' color='success'>Search</Button>
     </div>
         <div style={{display:"flex",width:"100%",justifyContent:"space-between",padding:"15px"}}>
            
@@ -126,8 +126,8 @@ const Result = ({org_id}) => {
                    {
                     toggle?<Paper elevation={4} style={{marginBottom:"30px"}}>
                     {
-                     searchResult.exam_id === x._id ? <Card  style={{display:"flex",justifyContent:"space-between",width:"100%",padding:"15px"}}>
-                      <div style={{display:"flex",justifyContent:"space-between"}}>
+                     searchResult.exam_id === x._id ? <Card  style={{display:"flex",fontWeight:"bold",justifyContent:"space-between",width:"100%",padding:"15px"}}>
+                      <div style={{display:"flex",justifyContent:"space-between",fontWeight:"bold"}}>
                       <p> name - {searchResult.name} </p> <RxCross1 onClick={e=>setToggle(!toggle)}/>          
                       </div>
                       <p >   roll no - {searchResult.roll_no} </p>        
@@ -201,7 +201,7 @@ const Result = ({org_id}) => {
 
            </Modal.Body>
            <Modal.Footer>
-             <Button variant='danger' onClick={e=>setExamSearchModal(false)}>Close</Button>
+             <Button variant='contained' color='error' onClick={e=>setExamSearchModal(false)}>Close</Button>
            </Modal.Footer>
         </Modal>
     </div>

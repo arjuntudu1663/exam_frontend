@@ -12,6 +12,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { Link } from '../Link';
 
 const Exam = ({org_id}) => {
   
@@ -21,6 +22,7 @@ const Exam = ({org_id}) => {
     const [currQuestions,setCurrQuestions] = useState([])
 
      const myRef = useRef();
+     const inputRef = useRef();
 
 
    
@@ -46,7 +48,7 @@ const Exam = ({org_id}) => {
     
     const createExam = async()=>{
         try{
-            const response = await axios.post("http://localhost:5000/exam_create",{...details,organizer:org_id})
+            const response = await axios.post(`${Link}/exam_create`,{...details,organizer:org_id})
             if(response.statusText === 'OK'){
                 window.location.reload()
             }
@@ -57,7 +59,7 @@ const Exam = ({org_id}) => {
         console.log(details,"<=== exam on details")
         console.log(myRef.current)
         try{
-            const response = await axios.post("http://localhost:5000/exam_on",{exam_id:exam_id,org_id:org_id});
+            const response = await axios.post(`${Link}/exam_on`,{exam_id:exam_id,org_id:org_id});
             console.log(response , "<=== on response")
             if(response.statusText === 'OK'){
                 window.location.reload();
@@ -70,7 +72,7 @@ const Exam = ({org_id}) => {
     const examOff = async(exam_id)=>{
 
         try{
-            const response = await axios.post("http://localhost:5000/exam_off",{exam_id:exam_id,org_id:org_id});
+            const response = await axios.post(`${Link}/exam_off`,{exam_id:exam_id,org_id:org_id});
             console.log(response , "<=== off response")
             if(response.statusText === 'OK'){
                 window.location.reload();
@@ -83,17 +85,18 @@ const Exam = ({org_id}) => {
     
     const addQuestion = async() =>{
         
+         
+        
+        
+
         try{
-            const response = await axios.post("http://localhost:5000/add_question",question)
+            const response = await axios.post(`${Link}/add_question`,question)
             console.log(response,"<=== add question response")
             
             if(response.statusText === 'OK'){
                 setQuestion((prev)=>{
-                    return {...prev,title:""}
+                    return {...prev,title:"",option1:"",option2:"",option3:"",option4:"",marks:"",answer:""}
                 })
-                 
-                window.location.reload();
-
             }
             
         }catch(e){}
@@ -103,7 +106,7 @@ const Exam = ({org_id}) => {
     const allQuestions_exam = async(exam_id) =>{
     
          try{
-            const response = await axios.post("http://localhost:5000/allQuestions_exam",{exam_id:exam_id})
+            const response = await axios.post(`${Link}/allQuestions_exam`,{exam_id:exam_id})
             
             setCurrQuestions(response.data.response)
             console.log(response.data,"<== curr questions")
@@ -119,7 +122,7 @@ const Exam = ({org_id}) => {
              
              try{
 
-                const response = await axios.get("http://localhost:5000/exam_all");
+                const response = await axios.get(`${Link}/exam_all`);
                 console.log(response.data)
                 response.data.map((x)=>{
                     if(x.organizer === org_id){
@@ -212,32 +215,32 @@ const Exam = ({org_id}) => {
                             </AccordionSummary>
                             <AccordionDetails>
                            
-                            <TextField value = {question.title}  onChange={e=>setQuestion((prev)=>{
+                            <TextField value={question.title} onChange={e=>setQuestion((prev)=>{
                                 return {...prev,title:e.target.value}
                             })} variant='filled' placeholder='question'/> 
                             <p></p>
-                            <TextField onChange={e=>setQuestion((prev)=>{
+                            <TextField value = {question.option1}  onChange={e=>setQuestion((prev)=>{
                                 return {...prev,option1:e.target.value,exam_id:x._id}
                             })} variant='outlined' placeholder='option A'/>
 
-                            <TextField onChange={e=>setQuestion((prev)=>{
+                            <TextField value = {question.option2} onChange={e=>setQuestion((prev)=>{
                                 return {...prev,option2:e.target.value}
                             })} variant='outlined' placeholder='option B'/>
 
-                           <TextField onChange={e=>setQuestion((prev)=>{
+                           <TextField  value = {question.option3} onChange={e=>setQuestion((prev)=>{
                                 return {...prev,option3:e.target.value}
                             })} variant='outlined' placeholder='option C'/>
 
-                           <TextField onChange={e=>setQuestion((prev)=>{
+                           <TextField value = {question.option4} onChange={e=>setQuestion((prev)=>{
                                 return {...prev,option4:e.target.value}
                             })} variant='outlined' placeholder='option D'/>
 
                             <p></p>
-                            <TextField onChange={e=>setQuestion((prev)=>{
+                            <TextField value = {question.marks} onChange={e=>setQuestion((prev)=>{
                                 return {...prev,marks:e.target.value}
                             })} variant='standard' placeholder='marks'/>
                             <p></p> 
-                            <TextField onChange={e=>setQuestion((prev)=>{
+                            <TextField value = {question.answer} onChange={e=>setQuestion((prev)=>{
                                 return {...prev,answer:e.target.value}
                             })} success variant='filled' placeholder='answer'/>
                             <p></p>
