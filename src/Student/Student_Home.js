@@ -203,11 +203,11 @@ const Student_Home = () => {
       try{
          
         const response = await axios.post(`${Link}/student_update`,{...additionalDetails,id:location.state.value._id})
-      
+        console.log(response,"<====")
         setProfile((prev)=>{
           return {...prev,batch:response.data.batch,stream:response.data.stream,roll_no:response.data.roll_no}
         })
-        if(response.data.value){
+        if(response.statusText === "OK"){
           window.location.reload()
         }
           
@@ -397,11 +397,11 @@ const Student_Home = () => {
                    
                     <h1>{cm}/{currExamAnswerKey.length}</h1>
 
-                 Exam Name - <h4 style={{fontWeight:"bold"}}> {examDetails.name}</h4>
+                       <h4 style={{fontWeight:"bold"}}> {examDetails.name}</h4>
                      <p></p>
-                 Duration  - <h4 style={{fontWeight:"bold"}}> {examDetails.duration}</h4> 
+                     <h4 style={{fontWeight:"bold"}}> {examDetails.duration}</h4> 
                      <p></p>
-                 Batch Code - <h4 style={{fontWeight:"bold"}}> {examDetails.batchCode}</h4> 
+                     <h4 style={{fontWeight:"bold"}}> {examDetails.batchCode}</h4> 
                 
                    </div>
 
