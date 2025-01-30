@@ -302,9 +302,9 @@ const Student_Home = () => {
                  <p></p>
                   {
                         myExams.map((x)=>{
-                            return <Card   style={{display:"flex",flexDirection:"row",justifyContent:"space-between",marginBottom:"15px",width:"100%",padding:"15px"}}>
+                            return <Card   style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-between",marginBottom:"15px",width:"100%",padding:"15px"}}>
                               <h3>{x.name}</h3>
-                              fullMarks - {x.fullMarks}
+                              <p style={{marginTop:"15px"}}>Full Marks - <span style={{fontWeight:"bold"}}>{x.fullMarks}</span></p>
                               <Button variant='outlined' style={{width:"30%"}} color='success'  onClick={e=>getQuestions(x._id,x.name,x.batchCode,x.duration,x.startTime)}>Open</Button>
                             </Card>
                         })

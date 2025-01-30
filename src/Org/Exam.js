@@ -294,7 +294,10 @@ const Exam = ({org_id}) => {
                            
                            
                         </Modal.Body>
-                        <Modal.Footer><Button  color='error' onClick={e=>setModalFlag(false)}>close</Button></Modal.Footer>
+                        <Modal.Footer><Button  color='error' onClick={(e)=>{
+                            setModalFlag(false)
+                            window.location.reload();
+                        }}>close</Button></Modal.Footer>
                   </Modal>
                 </Paper>
              })}

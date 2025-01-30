@@ -117,11 +117,12 @@ const Result = ({org_id}) => {
 
                 <div style={{display:"flex",width:"100%",alignItems:"center",justifyContent:"space-between",padding:"15px"}}>
                   
-                  <h4>{x.name} | <span style={{fontWeight:"bolder",opacity:"0.6"}}>{x.fullMarks} </span>  </h4><TextField onChange={e=>searchStudent(x.givers,e.target.value,x._id,x.roll_no)} label = " name / roll number"/>
-                 
+                  <h4>{x.name}  <span style={{fontWeight:"bolder",opacity:"0.6"}}></span>  </h4><TextField onChange={e=>searchStudent(x.givers,e.target.value,x._id,x.roll_no)} label = " name / roll number"/>
+                
                 </div>
+                <p>Full Marks - <span style={{fontWeight:"bold"}}>{x.fullMarks} </span></p>
                 <p></p>
-              
+                <hr></hr>
                   <p></p>
                 
                    {
@@ -159,8 +160,9 @@ const Result = ({org_id}) => {
              
            <Modal.Body>
                 
-                  <div style={{display:"flex",justifyContent:"space-between"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                   <h2>{examSearchVal.name}</h2>
+                  <p style={{marginTop:"15px"}}>Full Marks - <span style={{fontWeight:"bold"}}>{examSearchVal.fullMarks}</span></p>
                   <TextField onChange={e=>searchStudent(examSearchVal.givers,e.target.value,examSearchVal._id)} label = "search"/>
                   </div>
                   
